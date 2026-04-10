@@ -7,21 +7,21 @@
 
 | Nombre | Carné |
 |--------|-------|
-| Walter Alexander Ramirez Benitez | __________ |
-| Franklin Aldahir Portillo Flores | __________ |
+| Walter Alexander Ramirez Benitez | SMSS082124 |
+| Franklin Aldahir Portillo Flores | SMSS011624 |
 
 ---
 
 ## Estructura del proyecto
 
-lab2/
-├── index.php # Página de login
-├── dashboard.php # Panel principal (protegido por sesión)
-├── conexion.php # Conexión a la base de datos
-├── logout.php # Cierre de sesión
-├── style.css # Estilos personalizados
-└── laboratorio.sql # Base de datos
-
+lab2/  
+│  
+├── index.php        (Login)  
+├── dashboard.php    (Panel principal)  
+├── conexion.php     (Conexión a la base de datos)  
+├── logout.php       (Cerrar sesión)  
+├── style.css        (Estilos CSS)  
+└── laboratorio.sql  (Base de datos)  
 
 ---
 
