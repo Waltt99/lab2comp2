@@ -1,135 +1,111 @@
-# Laboratorio 2 – Programación Computacional IV
-
-## Descripción del proyecto
-
-El presente proyecto consiste en el desarrollo de una aplicación web utilizando PHP y MySQL, la cual permite implementar un sistema de autenticación de usuarios y registro de datos.
-
-El sistema permite a los usuarios iniciar sesión, ingresar información mediante formularios y visualizar los datos almacenados en una base de datos de forma organizada.
+# Laboratorio 2 – Segundo Cómputo
+### Programación Computacional IV
 
 ---
 
-## Tecnologías utilizadas
+## Integrantes
 
-- PHP
-- MySQL
-- HTML5
-- CSS3
-- XAMPP (entorno local)
-- phpMyAdmin
-- Git y GitHub
-
----
-
-## Funcionalidades del sistema
-
-- Inicio de sesión de usuarios
-- Validación de credenciales
-- Uso de sesiones para control de acceso
-- Registro de datos en la base de datos
-- Visualización de datos en una tabla
-- Cierre de sesión
-
----
-
-## Usuarios de prueba
-
-El sistema cuenta con los siguientes usuarios para iniciar sesión:
-
-| Usuario   | Contraseña |
-|----------|-----------|
-| admin    | 1234      |
-| walter   | 1234      |
-| franklin | 1234      |
+| Nombre | Carné |
+|--------|-------|
+| Walter Alexander Ramirez Benitez | __________ |
+| Franklin Aldahir Portillo Flores | __________ |
 
 ---
 
 ## Estructura del proyecto
 
 lab2/
-│
-├── index.php        # Página de login  
-├── dashboard.php    # Panel principal  
-├── conexion.php     # Conexión a la base de datos  
-├── logout.php       # Cierre de sesión  
-├── style.css        # Estilos  
-└── laboratorio.sql  # Base de datos exportada  
+├── index.php # Página de login
+├── dashboard.php # Panel principal (protegido por sesión)
+├── conexion.php # Conexión a la base de datos
+├── logout.php # Cierre de sesión
+├── style.css # Estilos personalizados
+└── laboratorio.sql # Base de datos
+
 
 ---
 
 ## Base de datos
 
-El sistema utiliza una base de datos llamada `laboratorio`, la cual contiene las siguientes tablas:
+La base de datos se llama `laboratorio` y contiene las siguientes tablas:
 
-### Tabla: usuarios
+### Tabla `usuarios`
 
-- id (INT, clave primaria, autoincremental)
-- username (VARCHAR)
-- password (VARCHAR)
+| Campo     | Tipo         | Descripción                        |
+|----------|-------------|----------------------------------|
+| id       | INT AI PK    | Identificador único del usuario  |
+| username | VARCHAR(50)  | Nombre de usuario                |
+| password | VARCHAR(255) | Contraseña encriptada            |
 
-### Tabla: registros
+### Tabla `registros`
 
-- id (INT, clave primaria, autoincremental)
-- nombre (VARCHAR)
-- descripcion (TEXT)
-- fecha (DATETIME)
-
----
-
-## Instalación y ejecución
-
-1. Clonar el repositorio:
-
-git clone https://github.com/TU_USUARIO/lab2-php-mysql.git
-
-2. Colocar la carpeta del proyecto en el directorio `htdocs` de XAMPP.
-
-3. Iniciar los servicios de Apache y MySQL desde XAMPP.
-
-4. Crear una base de datos con el nombre `laboratorio` en phpMyAdmin.
-
-5. Importar el archivo `laboratorio.sql`.
-
-6. Verificar la configuración del archivo `conexion.php`.
-
-7. Acceder al sistema desde el navegador:
-
-http://localhost/lab2
+| Campo        | Tipo         | Descripción                        |
+|-------------|-------------|----------------------------------|
+| id          | INT AI PK    | Identificador del registro       |
+| nombre      | VARCHAR(100) | Nombre del registro              |
+| descripcion | TEXT         | Descripción del dato             |
+| fecha       | DATETIME     | Fecha de creación automática     |
 
 ---
 
-## Uso del sistema
+## Preguntas de Análisis
 
-1. Iniciar sesión con un usuario válido.
-2. Acceder al panel principal.
-3. Registrar datos mediante el formulario.
-4. Visualizar los datos en la tabla.
-5. Cerrar sesión.
+### 1. ¿De qué forma manejaste el login de usuarios?
 
----
+El login se implementó mediante un formulario donde el usuario ingresa su nombre de usuario y contraseña. Estos datos son enviados al servidor usando el método POST, donde se realiza una consulta a la base de datos para verificar si existe un usuario con esas credenciales.
 
-## Manejo de sesiones
+Si las credenciales son correctas, se inicia una sesión utilizando `$_SESSION`, almacenando el usuario autenticado y permitiendo el acceso al panel principal. En cada página protegida se valida la existencia de esta sesión; en caso contrario, el usuario es redirigido al login.
 
-El sistema utiliza sesiones en PHP (`$_SESSION`) para mantener la autenticación del usuario durante la navegación, evitando accesos no autorizados a las páginas protegidas.
+Este mecanismo funciona porque permite mantener el estado del usuario autenticado durante la navegación, a pesar de que HTTP es un protocolo sin estado.
 
 ---
 
-## Validaciones implementadas
+### 2. ¿Por qué es necesario para las aplicaciones web utilizar bases de datos en lugar de variables?
 
-- Validación de campos vacíos
-- Verificación de credenciales
-- Restricción de acceso sin sesión activa
+Las variables en PHP solo existen durante la ejecución de una solicitud, por lo que la información se pierde una vez finaliza el proceso. En cambio, las bases de datos permiten almacenar información de forma permanente.
 
----
-
-## Integrantes
-
-- Integrante 1: Walter Alexander Ramirez Benitez
-- Integrante 2: Franklin Aldahir Portillo Flores
+Esto es fundamental en aplicaciones web, ya que los datos deben persistir para ser utilizados posteriormente, como los usuarios registrados o los datos ingresados. Además, las bases de datos permiten organizar la información, realizar consultas eficientes y mantener la integridad de los datos.
 
 ---
 
-## Conclusión
+### 3. ¿En qué casos sería mejor utilizar bases de datos y en cuáles cookies o sesiones?
 
-Este laboratorio permitió aplicar conocimientos fundamentales de desarrollo web, incluyendo el uso de PHP, conexión con bases de datos y manejo de sesiones.
+Las bases de datos se utilizan cuando se requiere almacenar información de forma permanente, como usuarios, registros o historial.
 
-Se logró implementar un sistema funcional que cumple con los requisitos planteados, permitiendo la autenticación de usuarios y el almacenamiento persistente de información.
+Las sesiones se utilizan para almacenar información temporal del usuario durante su navegación, como el estado de autenticación.
+
+Las cookies se utilizan para guardar información en el navegador del usuario, como preferencias o recordar datos de acceso.
+
+En resumen:
+- Base de datos: almacenamiento permanente  
+- Sesiones: almacenamiento temporal en el servidor  
+- Cookies: almacenamiento temporal en el cliente  
+
+---
+
+### 4. Descripción de tablas y justificación de tipos de dato
+
+Tabla `usuarios`:
+- id INT AUTO_INCREMENT: permite identificar de forma única a cada usuario.
+- username VARCHAR(50): adecuado para almacenar nombres de usuario de longitud variable.
+- password VARCHAR(255): permite almacenar contraseñas encriptadas.
+
+Tabla `registros`:
+- id INT AUTO_INCREMENT: identificador único del registro.
+- nombre VARCHAR(100): adecuado para textos cortos.
+- descripcion TEXT: permite almacenar contenido más extenso.
+- fecha DATETIME: registra la fecha y hora exacta del ingreso.
+
+Los tipos de datos fueron seleccionados para optimizar el almacenamiento, permitir flexibilidad en los datos y facilitar su manejo.
+
+---
+
+---
+
+## Credenciales de acceso
+
+| Usuario   | Contraseña |
+|----------|-----------|
+| admin    | 1234      |
+| walter   | 1234      |
+| franklin | 1234      |
